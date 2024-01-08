@@ -1,6 +1,9 @@
 package com.test.hoteltest;
 
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -33,8 +36,30 @@ public class RegisterServlet extends HttpServlet {
     }
 
     private boolean createUser(String name, String email, String password) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCE");
+        EntityManager em = emf.createEntityManager();
 
+        try {
+            em.getTransaction().begin();
 
-        return false;
+            User user = new User();
+            user.setEmail(email);
+            user.setName(name);
+            user.setPassword(password);
+
+            em.persist(user);
+            em.getTransaction().commit();
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            return false;
+        } finally {
+            em.close();
+            emf.close();
+        }
     }
 }

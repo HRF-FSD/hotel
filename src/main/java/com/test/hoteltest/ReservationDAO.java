@@ -12,7 +12,7 @@ public class ReservationDAO {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
 
-            session.persist(reservation);  // Utilisation de persist() au lieu de save()
+            session.persist(reservation);
 
             transaction.commit();
         } catch (Exception e) {

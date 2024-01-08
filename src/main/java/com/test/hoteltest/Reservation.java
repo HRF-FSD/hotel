@@ -2,15 +2,15 @@ package com.test.hoteltest;
 
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "reservations")
 public class Reservation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userEmail;
     private Long roomId;

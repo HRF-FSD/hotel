@@ -9,7 +9,7 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCE");
         EntityManager em = emf.createEntityManager();
 
-        // Your database operations go here
+
 
 
         em.close();

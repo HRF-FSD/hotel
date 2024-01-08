@@ -1,4 +1,7 @@
+<%@ page import="com.test.hoteltest.Room" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,32 +16,46 @@
     <img src="pictures/banner.png" alt="Hotel Image" class="hotel-image"/>
 </header>
 
+
 <section class="room-section">
     <h1>Our Rooms</h1>
+
+    <%-- Dynamic Room Display --%>
+    <%
+        List<Room> rooms = (List<Room>) request.getAttribute("availableRooms");
+        if(rooms != null){
+            for(Room room : rooms){
+                String imagePath;
+                switch (room.getType().toLowerCase()) {
+                    case "single":
+                        imagePath = "pictures/single.png";
+                        break;
+                    case "double":
+                        imagePath = "pictures/superior-room.jpg";
+                        break;
+                    case "suite":
+                        imagePath = "pictures/suite.png";
+                        break;
+                    case "triple":
+                        imagePath = "pictures/triple.png";
+                        break;
+                    default:
+                        imagePath = "pictures/default.png"; // Default image if type doesn't match
+                        break;
+                }
+    %>
     <div class="room">
-        <img src="pictures/superior-room.jpg" alt="Room Image"/>
-        <h2>Superior Room</h2>
-        <p>Enjoy the comfort of our Superior Rooms with a breathtaking view.</p>
-        <button onclick="orderNow('Superior Room')">Order Now</button>
+        <img src="<%= imagePath %>" alt="Room Image"/>
+        <h2><%= room.getType() %></h2>
+        <p><%= room.getIsAvailable() ? "Available" : "Not Available" %></p>
+        <p>Price: <%= room.getPrice() %> DH</p>
+        <a href="reservation.jsp?roomId=<%= room.getId() %>">Order Now</a>
+
     </div>
-    <div class="room">
-        <img src="pictures/superior-room.jpg" alt="Room Image"/>
-        <h2>One bedroom suite</h2>
-        <p>Enjoy yourself in our one bedroom suite with of course a fabulous view</p>
-        <button onclick="orderNow('one bedroom suite')">Order Now</button>
-    </div>
-    <div class="room">
-        <img src="pictures/superior-room.jpg" alt="Room Image"/>
-        <h2>One bedroom suite</h2>
-        <p>Enjoy yourself in our one bedroom suite with of course a fabulous view</p>
-        <button onclick="orderNow('one bedroom suite')">Order Now</button>
-    </div>
-    <div class="room">
-        <img src="pictures/superior-room.jpg" alt="Room Image"/>
-        <h2>One bedroom suite</h2>
-        <p>Enjoy yourself in our one bedroom suite with of course a fabulous view</p>
-        <button onclick="orderNow('one bedroom suite')">Order Now</button>
-    </div>
+    <%
+            }
+        }
+    %>
 
 </section>
 

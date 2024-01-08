@@ -38,8 +38,14 @@ public class Room {
         this.isAvailable = isAvailable;
     }
 
-    public Room(int i, String chambreStandard, double price, boolean isAvailable) {
+    public Room(int id, String roomNumber, String type, double price, boolean isAvailable) {
+        this.id = Long.valueOf(id);
+        this.roomNumber = roomNumber;
+        this.type = type;
+        this.price = price;
+        this.isAvailable = isAvailable;
     }
+
 
     // Getters and setters
 

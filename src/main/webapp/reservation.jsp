@@ -2,41 +2,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Effectuer une Réservation</title>
-  <link rel="stylesheet" href="reservationCSS.css"/>
+  <title>Make a Reservation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('pictures/reservation.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .reservation-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input[type="email"],
+    .form-group input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-
 <div class="reservation-container">
-  <h2>Réserver une Chambre</h2>
+  <h2>Reserve a Room</h2>
   <form action="ReservationServlet" method="post">
+    <input type="hidden" name="roomId" value="<%= request.getParameter("roomId") != null ? request.getParameter("roomId") : "" %>">
     <div class="form-group">
-      <label for="fullName">Nom Complet :</label>
-      <input type="text" id="fullName" name="fullName" required>
-    </div>
-    <div class="form-group">
-      <label for="email">Email :</label>
+      <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
     </div>
     <div class="form-group">
-      <label for="checkIn">Date d'Arrivée :</label>
+      <label for="checkIn">Check-in Date:</label>
       <input type="date" id="checkIn" name="checkIn" required>
     </div>
     <div class="form-group">
-      <label for="checkOut">Date de Départ :</label>
+      <label for="checkOut">Check-out Date:</label>
       <input type="date" id="checkOut" name="checkOut" required>
     </div>
-    <div class="form-group">
-      <label for="roomType">Type de Chambre :</label>
-      <select id="roomType" name="roomType">
-        <option value="standard">Standard</option>
-        <option value="deluxe">Deluxe</option>
-        <option value="suite">Suite</option>
-      </select>
-    </div>
-    <button type="submit" class="btn">Réserver</button>
+    <button type="submit" class="btn">Reserve</button>
   </form>
 </div>
-
 </body>
 </html>

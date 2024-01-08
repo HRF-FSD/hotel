@@ -1,14 +1,16 @@
 package com.test.hoteltest;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import java.io.IOException;
-import java.time.LocalDate;
-// Importez d'autres packages nécessaires, par exemple, pour la gestion de base de données
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet("/ReservationServlet")
 public class ReservationServlet extends HttpServlet {
@@ -17,32 +19,38 @@ public class ReservationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String fullName = request.getParameter("fullName");
-        String email = request.getParameter("email");
-        LocalDate checkIn = LocalDate.parse(request.getParameter("checkIn"));
-        LocalDate checkOut = LocalDate.parse(request.getParameter("checkOut"));
-        String roomType = request.getParameter("roomType");
+        String userEmail = request.getParameter("email");
+        Long roomId = Long.parseLong(request.getParameter("roomId"));
+        String checkInStr = request.getParameter("checkIn");
+        String checkOutStr = request.getParameter("checkOut");
 
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCE");
+        EntityManager em = emf.createEntityManager();
 
-        boolean isReservationSuccessful = makeReservation(fullName, email, checkIn, checkOut, roomType);
+        try {
+            em.getTransaction().begin();
 
-        if (isReservationSuccessful) {
+            Reservation reservation = new Reservation();
+            reservation.setUserEmail(userEmail);
+            reservation.setRoomId(roomId);
+            reservation.setCheckInDate(new SimpleDateFormat("yyyy-MM-dd").parse(checkInStr));
+            reservation.setCheckOutDate(new SimpleDateFormat("yyyy-MM-dd").parse(checkOutStr));
 
-            request.setAttribute("successMessage", "Votre réservation a été enregistrée avec succès.");
-            request.getRequestDispatcher("/reservation-success.jsp").forward(request, response);
-        } else {
+            em.persist(reservation);
+            em.getTransaction().commit();
 
+            request.setAttribute("reservation", reservation);
+            request.getRequestDispatcher("confirmation.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
             request.setAttribute("errorMessage", "Erreur lors de la réservation. Veuillez réessayer.");
-            request.getRequestDispatcher("/reservation.jsp").forward(request, response);
+            request.getRequestDispatcher("reservation.jsp").forward(request, response);
+        } finally {
+            em.close();
+            emf.close();
         }
     }
-
-    private boolean makeReservation(String fullName, String email, LocalDate checkIn, LocalDate checkOut, String roomType) {
-
-
-        return false; //
-    }
 }
-
-
-
