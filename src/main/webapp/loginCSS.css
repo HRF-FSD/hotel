@@ -1,14 +1,14 @@
-/* Responsive Design for Smaller Screens */
+
 @media (max-width: 768px) {
     .login-container {
         width: 90%;
     }
 }
 
-/* General Body Styles */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('pictures/hotelrecep.jpg'); /* Ensure correct path */
+    background-image: url('pictures/hotelrecep.jpg');
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -19,9 +19,9 @@ body {
     color: #333;
 }
 
-/* Login Container Styles */
+
 .login-container {
-    background: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+    background: rgba(255, 255, 255, 0.8);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -33,7 +33,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* Form Styling */
+
 .login-container form {
     display: flex;
     flex-direction: column;
@@ -53,9 +53,9 @@ body {
     box-sizing: border-box;
 }
 
-/* Submit Button */
+
 .login-container button {
-    background: #0056b3; /* Solid color background */
+    background: #0056b3;
     color: white;
     border: none;
     padding: 12px;
@@ -65,10 +65,10 @@ body {
 }
 
 .login-container button:hover {
-    background-color: #004494; /* Darker shade on hover */
+    background-color: #004494;
 }
 
-/* Additional Links */
+
 .login-container p {
     text-align: center;
     margin-top: 20px;

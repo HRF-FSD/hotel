@@ -1,7 +1,7 @@
-/* General Body Styles */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('/pictures/hotel-registration.png'); /* Ensure correct path */
+    background-image: url('/pictures/hotel-registration.png');
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,7 +10,7 @@ body {
     height: 100vh;
 }
 
-/* Registration Container Styles */
+
 .form-container {
     background: rgba(255, 255, 255, 0.95);
     padding: 40px;
@@ -27,7 +27,7 @@ body {
     font-size: 24px;
 }
 
-/* Registration Form Styles */
+
 .form-container form {
     display: flex;
     flex-direction: column;
@@ -56,7 +56,7 @@ input[type="password"]:focus {
     border-bottom: 2px solid #6dd5ed;
 }
 
-/* Submit Button Styles */
+
 .form-container .btn {
     background: #2193b0;
     color: white;
@@ -75,7 +75,7 @@ input[type="password"]:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Responsive Design for Smaller Screens */
+
 @media (max-width: 768px) {
     .form-container {
         width: 90%;
