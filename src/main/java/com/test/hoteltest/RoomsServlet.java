@@ -30,8 +30,8 @@ public class RoomsServlet extends HttpServlet {
     private List<Room> getAvailableRooms() {
 
         List<Room> rooms = new ArrayList<>();
-        rooms.add(new Room("Chambre Standard", "Description de la chambre standard.", 100));
-        rooms.add(new Room("Chambre Deluxe", "Description de la chambre deluxe.", 150));
+        rooms.add(new Room(1,"Chambre Standard", 12.0, true));
+        rooms.add(new Room(3,"Chambre double", 42.0, false));
 
         return rooms;
     }

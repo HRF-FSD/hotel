@@ -1,40 +1,88 @@
 package com.test.hoteltest;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-class Room {
-    private String name;
-    private String description;
-    private double price;
+@Entity
+@Table(name = "rooms")
+public class Room {
 
-    public Room(String name, String description, double price) {
-        this.name = name;
-        this.description = description;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
+    private String roomNumber;
+
+
+    private String type;
+
+
+    private Double price;
+
+
+    private Boolean isAvailable;
+
+    // Standard constructors, getters, and setters
+
+    public Room() {
+    }
+
+    public Room(String roomNumber, String type, Double price, Boolean isAvailable) {
+        this.roomNumber = roomNumber;
+        this.type = type;
         this.price = price;
+        this.isAvailable = isAvailable;
     }
 
-    // Getters
-    public String getName() {
-        return name;
+    public Room(int i, String chambreStandard, double price, boolean isAvailable) {
     }
 
-    public String getDescription() {
-        return description;
+    // Getters and setters
+
+    public Long getId() {
+        return id;
     }
 
-    public double getPrice() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Double getPrice() {
         return price;
     }
 
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
+
+    public Boolean getIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(Boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
+
+
 }
